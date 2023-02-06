@@ -1,0 +1,67 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Greeting_card
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            Panel1.Visible = false;
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+
+            Panel1.Visible = true;
+            string name = TextBox1.Text.Trim();
+            string gender = RadioButtonList1.SelectedItem.ToString().Trim();
+            string date = DropDownList1.SelectedValue.ToString().Trim();
+            string month = DropDownList2.SelectedValue.ToString().Trim();
+            string year = DropDownList3.SelectedValue.ToString().Trim();
+            var dob = new DateTime(Convert.ToInt32(year), Convert.ToInt32(month), Convert.ToInt32(date));
+            var today = DateTime.Now;
+            var age = today - dob;
+            string age1 = ((age.Days) / 365).ToString();
+            if (gender == "MALE")
+            {
+                Panel1.BackColor = System.Drawing.Color.BurlyWood;
+
+            }
+            else
+            {
+                Panel1.BackColor = System.Drawing.Color.AliceBlue;
+
+            }
+            if (CheckBox1.Checked == true)
+            {
+                Image1.Visible = true;
+                if (gender == "MALE")
+                {
+                    Image2.Visible = false;
+                    Image3.Visible = true;
+
+                }
+                if (gender == "FEMALE")
+                {
+                    Image2.Visible = true;
+                    Image3.Visible = false;
+                }
+
+            }
+            if (CheckBox1.Checked == false)
+            {
+                Image1.Visible = false;
+                Image2.Visible = false;
+                Image3.Visible = false;
+
+            }
+            Label8.Text = "HAPPY  " + age1 + "TH BIRTHDAY";
+            Label9.Text = name;
+        }
+    }
+}
